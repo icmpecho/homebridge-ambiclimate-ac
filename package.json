@@ -1,11 +1,12 @@
 {
   "name": "homebridge-ambiclimate-ac",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "author": "Pinnapong Silpsakulsuk",
   "main": "dist/index.js",
   "module": "dist/homebridge-ambiclimate-ac.esm.js",
   "typings": "dist/index.d.ts",
+  "keywords": ["homebridge-plugin"],
   "files": [
     "dist"
   ],
