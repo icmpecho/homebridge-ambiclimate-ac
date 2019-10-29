@@ -1,8 +1,6 @@
 import { AmbiClimateClientConfig } from './AmbiClimateClientConfig';
 import { AmbiClimateOauthResponse } from './response/AmbiClimateOauthResponse';
 import { AmbiClimateSetResponse } from './response/AmbiClimateSetResponse';
-import { AmbiClimateModeResponse } from './response/AmbiClimateModeResponse';
-import { AmbiClimateSensorTemperatureResponse } from './response/AmbiClimateSensorTemperatureResponse';
 import axios, { AxiosInstance } from 'axios';
 
 const BASE_URL = 'https://api.ambiclimate.com';
@@ -54,13 +52,13 @@ export class AmbiClimateClient {
     this.accessToken = response.data.access_token;
   }
 
-  async request<T>(url: string, data: any): Promise<T> {
+  async request<T>(url: string, params: any): Promise<T> {
     const response = await this.axios.get<T>(url, {
       headers: {
         Accept: 'application/json',
         Authorization: `Bearer ${this.accessToken}`,
       },
-      data,
+      params,
     });
     return response.data;
   }
@@ -93,32 +91,5 @@ export class AmbiClimateClient {
     if (result[0].status !== 'ok') {
       throw new Error(`SET ${path} failed!: ${JSON.stringify(result)}`);
     }
-  }
-
-  async mode(
-    locationName: string,
-    roomName: string
-  ): Promise<AmbiClimateModeResponse> {
-    return this.get<AmbiClimateModeResponse>(
-      '/device/mode',
-      locationName,
-      roomName
-    );
-  }
-
-  async sensorTemperature(
-    locationName: string,
-    roomName: string
-  ): Promise<number> {
-    const result = await this.get<AmbiClimateSensorTemperatureResponse[]>(
-      '/device/sensor/temperature',
-      locationName,
-      roomName
-    );
-    return result[0].value;
-  }
-
-  async powerOff(locationName: string, roomName: string): Promise<void> {
-    await this.set('/device/power/off', locationName, roomName, {});
   }
 }
