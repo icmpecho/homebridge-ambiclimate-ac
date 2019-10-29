@@ -1,6 +1,7 @@
 import { AmbiClimateClientConfig } from './AmbiClimateClientConfig';
 import { AmbiClimateOauthResponse } from './response/AmbiClimateOauthResponse';
 import { AmbiClimateModeResponse } from './response/AmbiClimateModeResponse';
+import { AmbiClimateSensorTemperatureResponse } from './response/AmbiClimateSensorTemperatureResponse';
 import axios, { AxiosInstance } from 'axios';
 
 const BASE_URL = 'https://api.ambiclimate.com';
@@ -71,5 +72,19 @@ export class AmbiClimateClient {
       room_name: roomName,
       location_name: locationName,
     });
+  }
+
+  async sensorTemperature(
+    locationName: String,
+    roomName: String
+  ): Promise<AmbiClimateSensorTemperatureResponse> {
+    const SENSOR_TEMPERATURE_URL = `${BASE_URL}/api/v1/device/sensor/temperature`;
+    return this.request<AmbiClimateSensorTemperatureResponse>(
+      SENSOR_TEMPERATURE_URL,
+      {
+        room_name: roomName,
+        location_name: locationName,
+      }
+    );
   }
 }
