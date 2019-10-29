@@ -1,5 +1,5 @@
 export interface AmbiClimateClientConfig {
-  clientID: String;
-  clientSecret: String;
-  refreshToken: String;
+  clientID: string;
+  clientSecret: string;
+  refreshToken: string;
 }

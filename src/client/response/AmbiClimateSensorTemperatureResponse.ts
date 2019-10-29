@@ -1,4 +1,4 @@
 export interface AmbiClimateSensorTemperatureResponse {
-  created_on: String;
-  value: Number;
+  created_on: string;
+  value: number;
 }

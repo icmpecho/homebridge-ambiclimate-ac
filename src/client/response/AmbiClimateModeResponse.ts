@@ -10,5 +10,5 @@ enum Mode {
 
 export interface AmbiClimateModeResponse {
   mode: Mode;
-  value: Number | null;
+  value: number | null;
 }

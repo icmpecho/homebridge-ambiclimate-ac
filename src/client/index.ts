@@ -13,7 +13,7 @@ enum GrantType {
 
 export class AmbiClimateClient {
   private config: AmbiClimateClientConfig;
-  private accessToken: String | null;
+  private accessToken: string | null;
   private axios: AxiosInstance;
 
   constructor(
@@ -63,28 +63,36 @@ export class AmbiClimateClient {
     return response.data;
   }
 
-  async mode(
-    locationName: String,
-    roomName: String
-  ): Promise<AmbiClimateModeResponse> {
-    const MODE_URL = `${BASE_URL}/api/v1/device/mode`;
-    return this.request<AmbiClimateModeResponse>(MODE_URL, {
+  async get<T>(
+    url: string,
+    locationName: string,
+    roomName: string
+  ): Promise<T> {
+    return this.request<T>(url, {
       room_name: roomName,
       location_name: locationName,
     });
   }
 
+  async mode(
+    locationName: string,
+    roomName: string
+  ): Promise<AmbiClimateModeResponse> {
+    return this.get<AmbiClimateModeResponse>(
+      `${BASE_URL}/api/v1/device/mode`,
+      locationName,
+      roomName
+    );
+  }
+
   async sensorTemperature(
-    locationName: String,
-    roomName: String
+    locationName: string,
+    roomName: string
   ): Promise<AmbiClimateSensorTemperatureResponse> {
-    const SENSOR_TEMPERATURE_URL = `${BASE_URL}/api/v1/device/sensor/temperature`;
-    return this.request<AmbiClimateSensorTemperatureResponse>(
-      SENSOR_TEMPERATURE_URL,
-      {
-        room_name: roomName,
-        location_name: locationName,
-      }
+    return this.get<AmbiClimateSensorTemperatureResponse>(
+      `${BASE_URL}/api/v1/device/sensor/temperature`,
+      locationName,
+      roomName
     );
   }
 }

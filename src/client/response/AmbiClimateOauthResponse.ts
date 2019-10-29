@@ -1,7 +1,7 @@
 export interface AmbiClimateOauthResponse {
-  access_token: String;
-  token_type: String;
-  expires_in: Number;
-  scope: String;
-  refresh_token: String;
+  access_token: string;
+  token_type: string;
+  expires_in: number;
+  scope: string;
+  refresh_token: string;
 }
