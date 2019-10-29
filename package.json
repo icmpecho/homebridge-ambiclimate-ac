@@ -16,6 +16,9 @@
     "lint": "tsdx lint"
   },
   "peerDependencies": {},
+  "engines": {
+    "homebridge": ">=0.4.0"
+  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
